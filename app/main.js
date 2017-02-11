@@ -45,12 +45,14 @@ var Main  = React.createClass({
     render() {
         if (Platform.OS === "ios") StatusBar.setBarStyle('light-content', true);
 
+        let iconColor = (Platform.OS === "ios") ? "#9A9A9A" : "rgba(255,255,255,.8)";
+        let iconSelectedColor = (Platform.OS === "ios") ? "#2D303C" : "#fff";
 
-        let FirstIcon = {type: Icons.Entypo, name: "home", size: 24, color: '#9A9A9A', selected: '#2D303C'};
-        let SecondIcon = {type: Icons.Octicons, name: "search", size: 20, color: '#9A9A9A', selected: '#2D303C'};
-        let ThirdIcon = {type: Icons.Ionicons, name: "ios-musical-notes", size: 24, color: '#9A9A9A', selected: '#2D303C'};
-        let FourthIcon = {type: Icons.MaterialIcons, name: "message", size: 24, color: '#9A9A9A', selected: '#2D303C'};
-        let FifthIcon = {type: Icons.FontAwesome, name: "user", size: 24, color: '#9A9A9A', selected: '#2D303C'};
+        let FirstIcon = {type: Icons.Entypo, name: "home", size: 24, color: iconColor, selected: iconSelectedColor};
+        let SecondIcon = {type: Icons.Octicons, name: "search", size: 20, color: iconColor, selected: iconSelectedColor};
+        let ThirdIcon = {type: Icons.Ionicons, name: "ios-musical-notes", size: 24, color: iconColor, selected: iconSelectedColor};
+        let FourthIcon = {type: Icons.MaterialIcons, name: "message", size: 24, color: iconColor, selected: iconSelectedColor};
+        let FifthIcon = {type: Icons.FontAwesome, name: "user", size: 24, color: iconColor, selected: iconSelectedColor};
 
         return (
             <Router createReducer={reducerCreate}
@@ -63,25 +65,29 @@ var Main  = React.createClass({
                                tabBarStyle={styles.tabBarStyle}
                                tabBarSelectedItemStyle={styles.tabBarSelectedItemStyle}>
 
-                            <Scene key="tab1" initial title="Home" icon={TabIcon} iconInfo={FirstIcon}>
+                            <Scene key="tab1" initial title="First" icon={TabIcon} iconInfo={FirstIcon}>
                                 <Scene key="first_view" component={First} title="First View"/>
                             </Scene>
 
-                            <Scene key="tab2" title="Directory" icon={TabIcon} iconInfo={SecondIcon}>
+                            <Scene key="tab2" title="Second" icon={TabIcon} iconInfo={SecondIcon}>
                                 <Scene key="second_view" component={Second} title="Second View" />
                             </Scene>
 
-                            <Scene key="tab3" title="Calendar" icon={TabIcon} iconInfo={ThirdIcon}>
+                            <Scene key="tab3" title="Third" icon={TabIcon} iconInfo={ThirdIcon}>
                                 <Scene key="third_view" component={Third} title="Third View"/>
                             </Scene>
 
-                            <Scene key="tab4" title="Restaurant" icon={TabIcon} iconInfo={FourthIcon}>
+                            <Scene key="tab4" title="Fourth" icon={TabIcon} iconInfo={FourthIcon}>
                                 <Scene key="fourth_view" component={Fourth} title="Fourth View"/>
                             </Scene>
 
-                            <Scene key="tab5"  title="Music" icon={TabIcon} iconInfo={FifthIcon}>
-                                <Scene key="fifth_view" component={Fifth} title="Fifth View"/>
-                            </Scene>
+                            {
+                                Platform.OS === "ios" &&
+                                <Scene key="tab5"  title="Fifth" icon={TabIcon} iconInfo={FifthIcon}>
+                                    <Scene key="fifth_view" component={Fifth} title="Fifth View"/>
+                                </Scene>
+                            }
+
 
                         </Scene>
                     </Scene>
@@ -93,25 +99,69 @@ var Main  = React.createClass({
 });
 
 const styles = StyleSheet.create({
-    tabBarStyle: {
-        backgroundColor: '#FEFEFE',
-        borderTopWidth:1, borderColor: "#F2F2F2", height: 45
-    },
-
-    tabBarSelectedItemStyle: {
-        backgroundColor: '#FEFEFE',
-        height: 45
-    },
-
     navigationBarStyle: {
-        backgroundColor: '#CB1B22'
+        backgroundColor: '#CB1B22',
+        ...Platform.select({
+            android: {
+                borderBottomWidth: 0
+            },
+        }),
     },
 
     titleStyle: {
         color: "#FFFFFF",
         fontWeight:"500",
         fontSize: 17,
-    }
+        ...Platform.select({
+            ios: {
+            },
+            android: {
+                alignSelf: 'flex-start',
+                textAlign: 'left',
+                paddingLeft: 15
+            },
+        }),
+    },
+
+    tabBarStyle: {
+        height: 45,
+        ...Platform.select({
+            ios: {
+                backgroundColor: '#FEFEFE',
+                borderTopWidth:1,
+                borderColor: "#F2F2F2",
+            },
+            android: {
+                backgroundColor: '#CB1B22',
+                top: 54,
+            },
+        }),
+    },
+
+    tabBarSelectedItemStyle: {
+        ...Platform.select({
+            ios: {
+                backgroundColor: '#FEFEFE'
+            },
+            android: {
+                borderBottomWidth:4,
+                borderBottomColor: "#F2F2F2",
+            },
+        }),
+        height: 45
+    },
+
+    iconColor: {
+        ...Platform.select({
+            ios: {
+                backgroundColor: '#9A9A9A'
+            },
+            android: {
+            },
+        }),
+        height: 45
+    },
+
 });
 
 module.exports = Main;
