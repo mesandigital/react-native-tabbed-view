@@ -5,7 +5,7 @@
  */
 
 import React, { Component } from 'react';
-import {StyleSheet} from 'react-native';
+import { StyleSheet, Platform, StatusBar } from 'react-native';
 
 import { Router, Scene, Reducer,} from 'react-native-router-flux';
 
@@ -43,6 +43,9 @@ const getSceneStyle = (/* NavigationSceneRendererProps */ props, computedProps) 
 
 var Main  = React.createClass({
     render() {
+        if (Platform.OS === "ios") StatusBar.setBarStyle('light-content', true);
+
+
         let FirstIcon = {type: Icons.Entypo, name: "home", size: 24, color: '#9A9A9A', selected: '#2D303C'};
         let SecondIcon = {type: Icons.Octicons, name: "search", size: 20, color: '#9A9A9A', selected: '#2D303C'};
         let ThirdIcon = {type: Icons.Ionicons, name: "ios-musical-notes", size: 24, color: '#9A9A9A', selected: '#2D303C'};
@@ -50,8 +53,11 @@ var Main  = React.createClass({
         let FifthIcon = {type: Icons.FontAwesome, name: "user", size: 24, color: '#9A9A9A', selected: '#2D303C'};
 
         return (
-            <Router createReducer={reducerCreate} getSceneStyle={getSceneStyle}>
-                <Scene key="root" hideNavBar hideTabBar>
+            <Router createReducer={reducerCreate}
+                    getSceneStyle={getSceneStyle}
+                    navigationBarStyle={styles.navigationBarStyle}
+                    titleStyle={styles.titleStyle} >
+                <Scene key="root">
                     <Scene key="tabbar" initial>
                         <Scene key="main" tabs
                                tabBarStyle={styles.tabBarStyle}
@@ -91,10 +97,21 @@ const styles = StyleSheet.create({
         backgroundColor: '#FEFEFE',
         borderTopWidth:1, borderColor: "#F2F2F2", height: 45
     },
+
     tabBarSelectedItemStyle: {
         backgroundColor: '#FEFEFE',
         height: 45
     },
+
+    navigationBarStyle: {
+        backgroundColor: '#CB1B22'
+    },
+
+    titleStyle: {
+        color: "#FFFFFF",
+        fontWeight:"500",
+        fontSize: 17,
+    }
 });
 
 module.exports = Main;
