@@ -45,14 +45,15 @@ var Main  = React.createClass({
     render() {
         if (Platform.OS === "ios") StatusBar.setBarStyle('light-content', true);
 
+        //Set Icon Info
         let iconColor = (Platform.OS === "ios") ? "#9A9A9A" : "rgba(255,255,255,.8)";
         let iconSelectedColor = (Platform.OS === "ios") ? "#2D303C" : "#fff";
 
-        let FirstIcon = {type: Icons.Entypo, name: "home", size: 24, color: iconColor, selected: iconSelectedColor};
-        let SecondIcon = {type: Icons.Octicons, name: "search", size: 20, color: iconColor, selected: iconSelectedColor};
-        let ThirdIcon = {type: Icons.Ionicons, name: "ios-musical-notes", size: 24, color: iconColor, selected: iconSelectedColor};
-        let FourthIcon = {type: Icons.MaterialIcons, name: "message", size: 24, color: iconColor, selected: iconSelectedColor};
-        let FifthIcon = {type: Icons.FontAwesome, name: "user", size: 24, color: iconColor, selected: iconSelectedColor};
+        let FirstIcon = {type: Icons.Entypo, name: "home", title: "Home", size: 20, color: iconColor, selected: iconSelectedColor};
+        let SecondIcon = {type: Icons.Octicons, name: "search", title: "Search", size: 20, color: iconColor, selected: iconSelectedColor};
+        let ThirdIcon = {type: Icons.Ionicons, name: "ios-musical-notes", title: "Music", size: 20, color: iconColor, selected: iconSelectedColor};
+        let FourthIcon = {type: Icons.MaterialIcons, name: "message", title: "Messages", size: 20, color: iconColor, selected: iconSelectedColor};
+        let FifthIcon = {type: Icons.FontAwesome, name: "user", title: "Users", size: 20, color: iconColor, selected: iconSelectedColor};
 
         return (
             <Router createReducer={reducerCreate}
@@ -66,29 +67,26 @@ var Main  = React.createClass({
                                tabBarSelectedItemStyle={styles.tabBarSelectedItemStyle}>
 
                             <Scene key="tab1" initial title="First" icon={TabIcon} iconInfo={FirstIcon}>
-                                <Scene key="first_view" component={First} title="First View"/>
+                                <Scene key="first_view" component={First} title={FirstIcon.title}/>
                             </Scene>
 
                             <Scene key="tab2" title="Second" icon={TabIcon} iconInfo={SecondIcon}>
-                                <Scene key="second_view" component={Second} title="Second View" />
+                                <Scene key="second_view" component={Second} title={SecondIcon.title} />
                             </Scene>
 
                             <Scene key="tab3" title="Third" icon={TabIcon} iconInfo={ThirdIcon}>
-                                <Scene key="third_view" component={Third} title="Third View"/>
+                                <Scene key="third_view" component={Third} title={ThirdIcon.title}/>
                             </Scene>
 
                             <Scene key="tab4" title="Fourth" icon={TabIcon} iconInfo={FourthIcon}>
-                                <Scene key="fourth_view" component={Fourth} title="Fourth View"/>
+                                <Scene key="fourth_view" component={Fourth} title={FourthIcon.title}/>
                             </Scene>
-
                             {
                                 Platform.OS === "ios" &&
                                 <Scene key="tab5"  title="Fifth" icon={TabIcon} iconInfo={FifthIcon}>
-                                    <Scene key="fifth_view" component={Fifth} title="Fifth View"/>
+                                    <Scene key="fifth_view" component={Fifth} title={FifthIcon.title}/>
                                 </Scene>
                             }
-
-
                         </Scene>
                     </Scene>
                 </Scene>

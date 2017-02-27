@@ -21,7 +21,7 @@ export default class extends Component {
         return (
             <View style={{justifyContent: "center", alignItems: "center", flex: 1}}>
 
-                <Text style={{fontSize: 20}}>Second View</Text>
+                <Text style={{fontSize: 20}}>{this.props.title}</Text>
 
             </View>
         )

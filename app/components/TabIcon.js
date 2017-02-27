@@ -1,6 +1,9 @@
 /**
- * Created by mosesesan on 10/02/2017.
+ * React Native Tabbed View
+ * E&M Digital
+ * Feb 10 2017
  */
+
 import React, { PropTypes, Component } from 'react';
 import { Text, View, Dimensions, Platform } from 'react-native';
 
@@ -31,37 +34,52 @@ export default class extends Component {
         let iconInfo = this.props.iconInfo;
         let iconType = iconInfo.type;
         let iconName = iconInfo.name;
+        let title = iconInfo.title;
         let iconSize = iconInfo.size;
         let iconColor = iconInfo.color;
         let iconSelectedColor = iconInfo.selected;
 
-        if (iconType === Icons.Entypo)
-            return <Icon name={iconName} size={iconSize} style={{height: iconSize}} color={this.props.selected ? iconSelectedColor : iconColor }/>
-        else if (iconType === Icons.EvilIcons)
-            return <Icon2 name={iconName} size={iconSize} style={{height: iconSize}} color={this.props.selected ? iconSelectedColor : iconColor }/>
-        else if (iconType === Icons.FontAwesome)
-            return <Icon3 name={iconName} size={iconSize} style={{height: iconSize}} color={this.props.selected ? iconSelectedColor : iconColor }/>
-        else if (iconType === Icons.Foundation)
-            return <Icon4 name={iconName} size={iconSize} style={{height: iconSize}} color={this.props.selected ? iconSelectedColor : iconColor }/>
-        else if (iconType === Icons.Ionicons)
-            return <Icon5 name={iconName} size={iconSize} style={{height: iconSize}} color={this.props.selected ? iconSelectedColor : iconColor }/>
-        else if (iconType === Icons.MaterialCommunityIcons)
-            return <Icon6 name={iconName} size={iconSize} style={{height: iconSize}} color={this.props.selected ? iconSelectedColor : iconColor }/>
-        else if (iconType === Icons.MaterialIcons)
-            return <Icon7 name={iconName} size={iconSize} style={{height: iconSize}} color={this.props.selected ? iconSelectedColor : iconColor }/>
-        else if (iconType === Icons.Octicons)
-            return <Icon8 name={iconName} size={iconSize} style={{height: iconSize}} color={this.props.selected ? iconSelectedColor : iconColor }/>
-        else if (iconType === Icons.SimpleLineIcons)
-            return <Icon9 name={iconName} size={iconSize} style={{height: iconSize}} color={this.props.selected ? iconSelectedColor : iconColor }/>
-        else if (iconType === Icons.Zocial)
-            return <Icon10 name={iconName} size={iconSize} style={{height: iconSize}} color={this.props.selected ? iconSelectedColor : iconColor }/>
-        else
-        return (
-            <View style={{borderWidth:1,
-                borderColor: "red",
-                justifyContent: "center",
-                alignItems: "center", height:20, width: 20}}>
+        let icon;
 
+        if (iconType === Icons.Entypo)
+            icon = <Icon name={iconName} size={iconSize} style={{height: iconSize}} color={this.props.selected ? iconSelectedColor : iconColor }/>
+        else if (iconType === Icons.EvilIcons)
+            icon = <Icon2 name={iconName} size={iconSize} style={{height: iconSize}} color={this.props.selected ? iconSelectedColor : iconColor }/>
+        else if (iconType === Icons.FontAwesome)
+            icon = <Icon3 name={iconName} size={iconSize} style={{height: iconSize}} color={this.props.selected ? iconSelectedColor : iconColor }/>
+        else if (iconType === Icons.Foundation)
+            icon = <Icon4 name={iconName} size={iconSize} style={{height: iconSize}} color={this.props.selected ? iconSelectedColor : iconColor }/>
+        else if (iconType === Icons.Ionicons)
+            icon = <Icon5 name={iconName} size={iconSize} style={{height: iconSize}} color={this.props.selected ? iconSelectedColor : iconColor }/>
+        else if (iconType === Icons.MaterialCommunityIcons)
+            icon = <Icon6 name={iconName} size={iconSize} style={{height: iconSize}} color={this.props.selected ? iconSelectedColor : iconColor }/>
+        else if (iconType === Icons.MaterialIcons)
+            icon = <Icon7 name={iconName} size={iconSize} style={{height: iconSize}} color={this.props.selected ? iconSelectedColor : iconColor }/>
+        else if (iconType === Icons.Octicons)
+            icon = <Icon8 name={iconName} size={iconSize} style={{height: iconSize}} color={this.props.selected ? iconSelectedColor : iconColor }/>
+        else if (iconType === Icons.SimpleLineIcons)
+            icon = <Icon9 name={iconName} size={iconSize} style={{height: iconSize}} color={this.props.selected ? iconSelectedColor : iconColor }/>
+        else if (iconType === Icons.Zocial)
+            icon = <Icon10 name={iconName} size={iconSize} style={{height: iconSize}} color={this.props.selected ? iconSelectedColor : iconColor }/>
+        else
+            icon =
+                <View style={{borderWidth:1,
+                    borderColor: "red",
+                    justifyContent: "center"}}/>
+
+
+        return (
+
+
+            <View style={{justifyContent: "center",  alignItems: "center"}}>
+                {icon}
+                {
+                    (title !== null) &&
+                    <Text style={{
+                        fontSize: 10, color: this.props.selected ? iconSelectedColor : iconColor }}>
+                        {title}
+                    </Text>
+                }
             </View>
         )
     }
