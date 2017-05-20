@@ -17,6 +17,22 @@ npm install
 react-native link
 ```
 
+## Setting the tabs for each section
+
+```javascript
+  let iconColor = (Platform.OS === "ios") ? "#9A9A9A" : "rgba(255,255,255,.8)";
+  let iconSelectedColor = (Platform.OS === "ios") ? "#2D303C" : "#fff";
+
+  let FirstIcon = {type: Icons.Entypo, name: "home", title: "Home", size: 20, color: iconColor, selected: iconSelectedColor};
+
+  .....
+
+  <Scene key="tab1" initial title="First" icon={TabIcon} iconInfo={FirstIcon}>
+        <Scene key="first_view" component={First} title={FirstIcon.title}/>
+  </Scene>
+
+```
+
 ## Demo
 
 <a href="https://appetize.io/app/7h0ut69mh9mjt0ze785dzrphh8?device=iphone5s&scale=75&orientation=portrait&osVersion=9.3" target="_blank">iOS</a>
@@ -26,6 +42,6 @@ react-native link
 
 ## Screenshots
 
-<img src="https://github.com/eandmdigital/react-native-tabbed-view/blob/master/screenshots/iOS.png" alt="iOS" height="500" width="300" align="left" border="2">
+<img src="https://github.com/eandmdigital/react-native-tabbed-view/blob/master/screenshots/iOS.png" alt="iOS" height="500" width="300" align="left" style="border: 1px solid black;">
 
-<img src="https://github.com/eandmdigital/react-native-tabbed-view/blob/master/screenshots/Android.png" alt="Android" height="500" width="300" align="left" border="2">
+<img src="https://github.com/eandmdigital/react-native-tabbed-view/blob/master/screenshots/Android.png" alt="Android" height="500" width="300" align="left" style="border: 1px solid black;">
